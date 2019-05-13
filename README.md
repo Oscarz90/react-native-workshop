@@ -182,7 +182,7 @@ Development Requirements:
 1. Install React Native CLI
 
 ~~~console
-npm install -g react-native-cli
+$ npm install -g react-native-cli
 ~~~
 
 2. Configure android or ios local development requirements
@@ -450,18 +450,141 @@ If the basic button doesn't look right for your app, you can build your own butt
 
 ## Navigation
 
+React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.
+
+### Stack Navigator
+
+Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
+
+### Switch Navigator
+
+The purpose of SwitchNavigator is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away.
+
+This is the exact behavior that we want for an authentication flow.
+
+### Drawer Navigator
+
+This navigation method provide a way to directly switch between different screens via a drawer. This slide drawer contains links to different screens of the application.
+
+### Bottom Navigator
+
+A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
+
 ## Networking
 
+Many mobile apps need to load resources from a remote URL. You may want to make a POST request to a REST API, or you may simply need to fetch a chunk of static content from another server.
+
+React Native provides the Fetch API for your networking needs. Fetch will seem familiar if you have used **XMLHttpRequest** or other networking APIs before
+
+The XMLHttpRequest API is built in to React Native. This means that you can use third party libraries such as frisbee or axios that depend on it, or you can use the XMLHttpRequest API directly if you prefer.
+
+
+~~~jsx
+import React from 'react';
+import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
+import axios from 'axios';
+
+export default class FetchExample extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state ={ isLoading: true}
+  }
+
+  componentDidMount(){
+
+    fetch('https://facebook.github.io/react-native/movies.json')
+    .then((response) => response.json())
+    .then((responseJson) => {
+
+      this.setState({
+        isLoading: false,
+        dataSource: responseJson.movies,
+      }, function(){
+
+      });
+
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+
+    axios.get(
+      'https://facebook.github.io/react-native/movies.json'
+    ).then(responseJson=>{
+      this.setState({
+        isLoading: false,
+        dataSource: responseJson.movies,
+      }, function(){
+
+      });
+    }).catch(error=>{
+      console.error(error)
+    });
+
+  }
+
+  render(){
+
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
+
+    return(
+      <View style={{flex: 1, paddingTop:20}}>
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
+          keyExtractor={({id}, index) => id}
+        />
+      </View>
+    );
+  }
+}
+~~~
+
 ## React Main Concepts
-
-
 
 
 Guides
 
 ---
 
-## Basic Components
+## Components and APIs
+
+Most apps will end up using one of these basic components. You'll want to get yourself familiarized with all of these if you're new to React Native.
+
+### Components
+
+* View
+* Text
+* Image
+* TextInput
+* ScrollView
+* StyleSheet
+
+### User Interface
+
+* Button
+* Picker
+* Slider
+* Switch
+
+### List Views
+
+* FlatList
+* SectionList
+
+### [iOS Components and APIs](https://facebook.github.io/react-native/docs/components-and-apis#ios-components-and-apis)
+
+### [Android Components and APIs](https://facebook.github.io/react-native/docs/components-and-apis#android-components-and-apis)
+
+### [Others](https://facebook.github.io/react-native/docs/components-and-apis#others)
+
 
 ##  Platform Specific Code
 
