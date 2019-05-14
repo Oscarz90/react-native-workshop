@@ -456,19 +456,36 @@ React Navigation is born from the React Native community's need for an extensibl
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
+![Stack Navigator](assets/images/navigation/StackNavigator.png "titulo")
+
 ### Switch Navigator
 
 The purpose of SwitchNavigator is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away.
 
 This is the exact behavior that we want for an authentication flow.
 
+![Switch Navigator](assets/images/navigation/SwitchNavigator.png "titulo")
+
 ### Drawer Navigator
 
 This navigation method provide a way to directly switch between different screens via a drawer. This slide drawer contains links to different screens of the application.
 
+![Drawer Navigator](assets/images/navigation/DrawerNavigator.png "titulo")
+
 ### Bottom Navigator
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
+
+![Bottom Navigator](assets/images/navigation/TabNavigator.png "titulo")
+
+E.g. "**Stack Navigator**"
+
+![Login Navigation](assets/images/navigation/LoginStackNavigator.png "titulo")
+
+E.g. "**Complete App Navigation**"
+
+![App Navigation](assets/images/navigation/AppNavigation.png "titulo")
+
 
 ## Networking
 
@@ -588,7 +605,185 @@ Most apps will end up using one of these basic components. You'll want to get yo
 
 ##  Platform Specific Code
 
+When building a cross-platform app, you'll want to re-use as much code as possible. Scenarios may arise where it makes sense for the code to be different, for example you may want to implement separate visual components for iOS and Android.
+
+React Native provides two ways to easily organize your code and separate it by platform:
+
++ Using the Platform module  
+  
+  e.g.
+  ~~~jsx
+  import {Platform, StyleSheet} from 'react-native';
+
+  const styles = StyleSheet.create({
+    height: Platform.OS === 'ios' ? 200 : 100,
+  });
+  ~~~
+  e.g.
+  ~~~jsx
+  import {Platform, StyleSheet} from 'react-native';
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      ...Platform.select({
+        ios: {
+          backgroundColor: 'red',
+        },
+        android: {
+          backgroundColor: 'blue',
+        },
+      }),
+    },
+  });
+  ~~~
+  + Detecting the Android version
+  
+  On Android, the **Platform** module can also be used to detect the version of the Android Platform in which the app is running:
+  
+  ~~~jsx
+  import {Platform} from 'react-native';
+
+  if (Platform.Version === 25) {
+    console.log('Running on Nougat!');
+  }
+  ~~~~
+
+  + Detecting the iOS version
+  
+  On iOS, the Version is a result of -[UIDevice systemVersion], which is a string with the current version of the operating system. An example of the system version is "10.3". For example, to detect the major version number on iOS:
+  
+  ~~~jsx
+  import {Platform} from 'react-native';
+
+  const majorVersionIOS = parseInt(Platform.Version, 10);
+  if (majorVersionIOS <= 9) {
+    console.log('Work around a change in behavior');
+  }
+  ~~~
+
++ Using platform-specific file extensions
+
+When your platform-specific code is more complex, you should consider splitting the code out into separate files. React Native will detect when a file has a .ios. or .android. extension and load the relevant platform file when required from other components.
+
+For example, say you have the following files in your project:
+
+~~~
+BigButton.ios.js
+BigButton.android.js
+~~~
+
+You can then require the component as follows:
+
+~~~jsx
+import BigButton from './BigButton';
+~~~
+
+React Native will automatically pick up the right file based on the running platform.
+
 ## ScrollView
 
-## Lists
+The ScrollView is a generic scrolling container that can host multiple components and views. The scrollable items need not be homogeneous, and you can scroll both vertically and horizontally (by setting the horizontal property).
+
+~~~jsx
+import React, { Component } from 'react';
+import { AppRegistry, ScrollView, Image, Text } from 'react-native';
+
+export default class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
+  render() {
+      return (
+        <ScrollView>
+          <Text style={{fontSize:96}}>Scroll me plz</Text>
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Text style={{fontSize:96}}>If you like</Text>
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Text style={{fontSize:96}}>Scrolling down</Text>
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Text style={{fontSize:96}}>What's the best</Text>
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Text style={{fontSize:96}}>Framework around?</Text>
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
+          <Text style={{fontSize:80}}>React Native</Text>
+        </ScrollView>
+    );
+  }
+}
+
+// skip these lines if using Create React Native App
+AppRegistry.registerComponent(
+  'AwesomeProject',
+  () => IScrolledDownAndWhatHappenedNextShockedMe);
+
+~~~
+
+## List Views
+
+React Native provides a suite of components for presenting lists of data. Generally, you'll want to use either FlatList or SectionList.
+
+The FlatList component displays a scrolling list of changing, but similarly structured, data. FlatList works well for long lists of data, where the number of items might change over time. Unlike the more generic ScrollView, the FlatList only renders elements that are currently showing on the screen, not all the elements at once.
+
+The FlatList component requires two props: data and renderItem. data is the source of information for the list. renderItem takes one item from the source and returns a formatted component to render.
+
+~~~jsx
+import React, { Component } from 'react';
+import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
+
+export default class FlatListBasics extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={[
+            {key: 'Devin'},
+            {key: 'Jackson'},
+            {key: 'James'},
+            {key: 'Joel'},
+            {key: 'John'},
+            {key: 'Jillian'},
+            {key: 'Jimmy'},
+            {key: 'Julie'},
+          ]}
+          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+        />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+   flex: 1,
+   paddingTop: 22
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+})
+
+// skip this line if using Create React Native App
+AppRegistry.registerComponent('AwesomeProject', () => FlatListBasics);
+
+~~~
 
