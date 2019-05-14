@@ -383,20 +383,33 @@ Use flex in a component's style to have the component expand and shrink dynamica
 
 + flexDirection 
   + enum(`column`,`row`)
+
   ![flex column](assets/images/layout/flex-column.jpeg "column")
+
   ![flex row](assets/images/layout/flex-row.jpeg "row")
+
 + justifyContent 
   + enum(`flex-start`, `flex-end`, `center`, `space-around`, `space-between`)
   + `column -> justifyContent -> flex-start`
+
   ![flex start](assets/images/layout/column-flex-start.jpeg "flex-start")
+
   + `column -> justifyContent -> flex-end`
+
   ![flex end](assets/images/layout/column-flex-end.jpeg "flex-end")
+
   + `column -> justifyContent -> center`
+
   ![center](assets/images/layout/column-center.jpeg "center")
+
   + `column -> justifyContent -> space-around`
+
   ![space around](assets/images/layout/column-space-around.jpeg "space around")
+
   + `column -> justifyContent -> space-between`
+
   ![space between](assets/images/layout/column-space-between.jpeg "space between")
+  
 + alignItems
   + enum(`flex-start`, `flex-end`, `center`, `space-around`, `space-between`)
 + alignSelf
