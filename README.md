@@ -2,10 +2,6 @@
 
 In this course we will see the fundamental concepts of react native
 
-### Table of Contents
-
-+ [Values & Types](#values-and-types)
-
 ## What is React Native
 
 React Native is a framework created by Facebook to enable a smooth and easy cross-platform mobile development.   
