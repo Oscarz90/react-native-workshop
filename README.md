@@ -16,11 +16,19 @@ React Native helps you create real and exciting mobile apps with the help of Jav
 + Reusable components allow hybrid apps to render natively
 + Apply react native ui components to an existing app’s code—without any rewriting at all
 
+> Its main strength is that it doesn’t rely on webviews like other competitors (Phonegap, Ionic, Cordova…),
+
 ## How?
 
 Give me a **state** and a **_render()_** method that depends on it and forget about how and when to render.*
 
 >Unless you want more control
+
+## React Native Bridge Concept
+
+React Native is built in such a way that it uses existing compilers:
+
+![flex direction](assets/images/react-bridge.png "flexDirection")
 
 ## ¿React & React Native?
 
