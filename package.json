@@ -1,0 +1,31 @@
+{
+  "name": "react-native-workshop",
+  "version": "1.0.0",
+  "description": "A brief and concise introduction to react native",
+  "main": "index.mdx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mdx-deck build deck.mdx",
+    "start": "mdx-deck deck.mdx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oscarz90/react-native-workshop.git"
+  },
+  "keywords": [
+    "react",
+    "js",
+    "es6"
+  ],
+  "author": "OMS",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Oscarz90/react-native-workshop/issues"
+  },
+  "homepage": "https://github.com/Oscarz90/react-native-workshop#readme",
+  "dependencies": {
+    "grommet": "^2.6.6",
+    "mdx-deck": "^2.3.2",
+    "react": "^16.8.6"
+  }
+}
