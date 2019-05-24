@@ -141,14 +141,19 @@ Development Requirements:
   ~~~console
   ~$ expo init MyHybridApp
   ~~~
+  [![asciicast](https://asciinema.org/a/21w0pUCDOPvuZ6rwOkVoCHY5d.svg)](https://asciinema.org/a/21w0pUCDOPvuZ6rwOkVoCHY5d)
 
 3. Change to the new project folder and start the development server.
 
 ~~~console
-~/MyHybridApp$ npm start
+~/MyHybridApp$ yarn start
 ~~~
 
+[![asciicast](https://asciinema.org/a/kuQ46854Z5Bse7Ge43puCHbZO.svg)](https://asciinema.org/a/kuQ46854Z5Bse7Ge43puCHbZO)
+
 4. The last step will open a web development console, after that open _**expo** app_ on your mobile and **scan** the **QR** code provided by the web console, this will open the app on your physical device
+
+![expo dev console](assets/images/expo-dev-console.png "expo dev console")
 
 ### React Native
 
@@ -224,11 +229,35 @@ class Greeting extends React.Component {
     );
   }
 }
+
+Greeting.propTypes = {
+  name: PropTypes.string
+}
+Greeting.defaultProps = {
+  name: 'World'
+}
 ~~~
 
 _Usage:_
 
 `<Gretting name='Oscar'>`
+
+_React Props Patterns_
+~~~jsx
+function Greeting(props) {
+  return <Text>Hi {props.name}!</Text>;
+}
+
+function Greeting({ name }) {
+  return <Text>Hi {name}!</Text>;
+}
+
+function Greeting({ name, ...restProps }) {
+  return <Text {...restProps}>Hi {name}!</Text>;
+}
+~~~
+
+[Props and State in React Native explained in Simple English](https://codeburst.io/props-and-state-in-react-native-explained-in-simple-english-8ea73b1d224e)
 
 ## State
 
@@ -269,10 +298,27 @@ class Counter extends React.Component{
 
 ~~~
 
+## React Native Component Lifecycle Api
+
+What is a lifecycle api?
+
+it is a bunch of functions provided by React Native to instantiate, mount, render, and eventually update,unmount, and destroy components. This api helps us to initialise ,update data in the right way.
+
+Let’s look at each phase of the component lifecycle. In React Native the Api contains 3major phases : mounting phase, updating phase and unmouting phase, so the order should be :
+
+**Mounting cycle**
+
+![life cycle](assets/images/mounting-cycle-api.jpeg "life cycle")
+
+after this step we will enter to runtime loop, where our app will be in updating cycle, so our component will wait for updates occured either in props or state.
+
+**Runtime Loop**
+
+![life cycle](assets/images/after-mounting-cycle-api.jpeg "life cycle")
+
 ## Style
 
 With React Native, you don't use a special language or syntax for defining styles. You just style your application using JavaScript. All of the core components accept a prop named style. The style names and values usually match how CSS works on the web, except names are written using camel casing, e.g `backgroundColor` rather than backgrond-color
-
 
 ~~~jsx
 import React from 'react';
